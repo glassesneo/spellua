@@ -1,0 +1,101 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "nim@latest": {
+      "last_modified": "2024-06-12T20:55:33Z",
+      "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#nim",
+      "source": "devbox-search",
+      "version": "2.0.4",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hxdk4s1jb97w7m0jpq9n0c6d3qf5fx12-aarch64-apple-darwin-nim-wrapper-2.0.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hxdk4s1jb97w7m0jpq9n0c6d3qf5fx12-aarch64-apple-darwin-nim-wrapper-2.0.4"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8pzvpyl643dwwfaxskmjvwx4c35fbl2g-aarch64-unknown-linux-gnu-nim-wrapper-2.0.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8pzvpyl643dwwfaxskmjvwx4c35fbl2g-aarch64-unknown-linux-gnu-nim-wrapper-2.0.4"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/x7v74jx9rv52scnyxiimh72fw8cyd6jm-x86_64-apple-darwin-nim-wrapper-2.0.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/x7v74jx9rv52scnyxiimh72fw8cyd6jm-x86_64-apple-darwin-nim-wrapper-2.0.4"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7c332ssdp9zvgrybb62k21i4ir9hsz5p-x86_64-unknown-linux-gnu-nim-wrapper-2.0.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7c332ssdp9zvgrybb62k21i4ir9hsz5p-x86_64-unknown-linux-gnu-nim-wrapper-2.0.4"
+        }
+      }
+    },
+    "nimble@latest": {
+      "last_modified": "2024-06-12T20:55:33Z",
+      "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#nimble",
+      "source": "devbox-search",
+      "version": "0-unstable-2024-05-14",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/a72bn69swslcdy3vjm6ir47f3p9yshyj-nimble-0-unstable-2024-05-14",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/a72bn69swslcdy3vjm6ir47f3p9yshyj-nimble-0-unstable-2024-05-14"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ph0y2rmmaivd9kk2hdz2ymzqwlmbqyzh-nimble-0-unstable-2024-05-14",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ph0y2rmmaivd9kk2hdz2ymzqwlmbqyzh-nimble-0-unstable-2024-05-14"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8735qd07hf5l7lfpnw6z8v7kfynyqgzh-nimble-0-unstable-2024-05-14",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8735qd07hf5l7lfpnw6z8v7kfynyqgzh-nimble-0-unstable-2024-05-14"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6ls37pz9kh3gn7ny1qa0cy1rmw8rbl4m-nimble-0-unstable-2024-05-14",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6ls37pz9kh3gn7ny1qa0cy1rmw8rbl4m-nimble-0-unstable-2024-05-14"
+        }
+      }
+    }
+  }
+}
