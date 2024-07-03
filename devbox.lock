@@ -1,6 +1,54 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "luajit@2.1.1713773202": {
+      "last_modified": "2024-06-12T20:55:33Z",
+      "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#luajit",
+      "source": "devbox-search",
+      "version": "2.1.1713773202",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2aq0i9v6cwi1xz41yi6hfcrv1ma8411x-luajit-2.1.1713773202",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2aq0i9v6cwi1xz41yi6hfcrv1ma8411x-luajit-2.1.1713773202"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/af93483aig25df888ks563bhkdgi8py2-luajit-2.1.1713773202",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/af93483aig25df888ks563bhkdgi8py2-luajit-2.1.1713773202"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cjqla2cya6h94jff8la5rwyfwgsacshp-luajit-2.1.1713773202",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cjqla2cya6h94jff8la5rwyfwgsacshp-luajit-2.1.1713773202"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kvc6zy9pavv5k2vd419zzb992kwjjqqr-luajit-2.1.1713773202",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/kvc6zy9pavv5k2vd419zzb992kwjjqqr-luajit-2.1.1713773202"
+        }
+      }
+    },
     "nim@2.0.4": {
       "last_modified": "2024-06-12T20:55:33Z",
       "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#nim",
