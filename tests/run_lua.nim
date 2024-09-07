@@ -13,5 +13,9 @@ echo driver.getInteger(Size)
 
 echo driver.getBoolean(Enable)
 
+driver.bindString(V1)
+
+echo V1
+
 driver.close()
 

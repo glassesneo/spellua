@@ -55,3 +55,15 @@ macro getString*(driver: LuaDriver, name: untyped): string =
       `driver`.state.getglobal(`nameStrLit`)
       $`driver`.state.tostring(-1)
 
+template bindNumber*(driver: LuaDriver, name: untyped): untyped =
+  let name {.inject.} = driver.getNumber(name)
+
+template bindInteger*(driver: LuaDriver, name: untyped): untyped =
+  let name {.inject.} = driver.getInteger(name)
+
+template bindBoolean*(driver: LuaDriver, name: untyped): untyped =
+  let name {.inject.} = driver.getBoolean(name)
+
+template bindString*(driver: LuaDriver, name: untyped): untyped =
+  let name {.inject.} = driver.getString(name)
+
