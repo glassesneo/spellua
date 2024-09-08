@@ -39,5 +39,5 @@ V1 = "bound variable"
 ```
 
 ## License
-ecslib is licensed under the MIT license. See COPYING for details.
+spellua is licensed under the MIT license. See COPYING for details.
 
