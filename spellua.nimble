@@ -1,12 +1,10 @@
 # Package
 
 version = "0.1.0"
-author = "Glasses-Neo"
-description = "A new awesome nimble package"
+author = "glassesneo"
+description = "A high level LuaJIT bindings"
 license = "WTFPL"
 srcDir = "src"
-binDir = "bin"
-bin = @["spellua"]
 
 
 # Dependencies
