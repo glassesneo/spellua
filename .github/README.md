@@ -1,6 +1,11 @@
 # spellua
 spellua is a high level LuaJIT bindings for Nim.
 
+## Installation
+```sh
+nimble install spellua
+```
+
 ## Usage
 ```nim
 import
