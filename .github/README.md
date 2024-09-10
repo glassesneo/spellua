@@ -31,7 +31,8 @@ echo V1
 driver.close()
 ```
 
-```lua:sample.lua
+```lua
+-- sample.lua
 Name = [[=================
 Hello World
 =================]]
