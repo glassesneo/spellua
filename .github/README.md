@@ -45,5 +45,5 @@ V1 = "bound variable"
 ```
 
 ## License
-spellua is licensed under the MIT license. See COPYING for details.
+spellua is licensed under the WTFPL license. See COPYING for details.
 
