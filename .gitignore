@@ -4,3 +4,5 @@ tests/*
 !*.nim
 !*.nims
 nimbledeps/*
+nim.cfg
+
