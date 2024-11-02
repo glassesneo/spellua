@@ -12,7 +12,7 @@ import
   std/os,
   spellua
 
-let driver = LuaDriver.new()
+let driver = LuaDriver.init()
 driver.loadFile(getAppDir()/"sample.lua")
 
 # Get lua variables
