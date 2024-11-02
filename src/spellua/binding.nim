@@ -1,12 +1,12 @@
-const LibName = when defined(MACOSX):
-  "libluajit-5.1.dylib"
-elif defined(UNIX):
-  "libluajit-5.1.so(|.0)"
-else:
-  "luajit-5.1.dll"
+const LibName =
+  when defined(MACOSX):
+    "libluajit-5.1.dylib"
+  elif defined(UNIX):
+    "libluajit-5.1.so(|.0)"
+  else:
+    "luajit-5.1.dll"
 
-const
-  GlobalSIndex = -10002
+const GlobalSIndex = -10002
 
 type
   LuaState* = pointer
@@ -37,7 +37,7 @@ proc openlibs*(state: LuaState) {.importc: "luaL_openlibs".}
 
 proc settop*(state: LuaState, index: cint) {.plua.}
 
-proc pcall*(state: LuaState; nargs, nresults, errf: cint): cint {.plua.}
+proc pcall*(state: LuaState, nargs, nresults, errf: cint): cint {.plua.}
 
 proc tonumber*(state: LuaState, index: cint): Number {.plua.}
 
@@ -45,11 +45,7 @@ proc tointeger*(state: LuaState, index: cint): Integer {.plua.}
 
 proc toboolean*(state: LuaState, index: cint): cint {.plua.}
 
-proc tolstring*(
-    state: LuaState,
-    index: cint,
-    length: ptr cint
-): cstring {.plua.}
+proc tolstring*(state: LuaState, index: cint, length: ptr cint): cstring {.plua.}
 
 proc getfield*(state: LuaState, index: cint, k: cstring) {.plua.}
 
@@ -69,10 +65,9 @@ proc setglobal*(state: LuaState, s: cstring) =
 proc settable*(state: LuaState, index: cint) {.plua.}
 proc setmetatable*(state: LuaState, index: cint) {.plua.}
 
-
 {.push importc: "luaL_$1".}
 
-proc newstate*: LuaState
+proc newstate*(): LuaState
 
 proc loadfile*(state: LuaState, filename: cstring): cint
 
@@ -81,10 +76,11 @@ proc loadfile*(state: LuaState, filename: cstring): cint
 {.pop.}
 
 proc pop*(state: LuaState, n: cint) =
-  state.settop(-n-1)
+  state.settop(-n - 1)
 
 proc tostring*(state: LuaState, i: cint): cstring =
   result = state.tolstring(i, nil)
 
 proc getglobal*(state: LuaState, s: cstring) =
   state.getfield(GlobalSIndex, s)
+

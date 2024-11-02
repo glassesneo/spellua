@@ -1,11 +1,9 @@
-import
-  std/os,
-  ../src/spellua,
-  ../src/spellua/binding
+import std/os
+import ../src/spellua, ../src/spellua/binding
 
 let driver = LuaDriver.new()
 
-driver.loadFile(getAppDir()/"sample.lua")
+driver.loadFile(getAppDir() / "sample.lua")
 
 echo driver.getString(Name)
 
@@ -17,5 +15,10 @@ driver.bindString(V1)
 
 echo V1
 
-driver.close()
+let syncVal = 5
 
+driver.syncInteger(syncVal)
+
+echo driver.getInteger(syncVal)
+
+driver.close()

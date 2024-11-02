@@ -13,20 +13,21 @@ import
   spellua
 
 let driver = LuaDriver.new()
-
 driver.loadFile(getAppDir()/"sample.lua")
 
 # Get lua variables
 echo driver.getString(Name)
-
 echo driver.getInteger(Size)
-
 echo driver.getBoolean(Enable)
 
 # Bind lua variables
 driver.bindString(V1)
-
 echo V1
+
+# Sync nim variables to lua runtime
+let syncVal = 5
+driver.syncInteger(syncVal)
+echo driver.getInteger(syncVal)
 
 driver.close()
 ```
