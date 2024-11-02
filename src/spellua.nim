@@ -67,3 +67,47 @@ template bindBoolean*(driver: LuaDriver, name: untyped): untyped =
 template bindString*(driver: LuaDriver, name: untyped): untyped =
   let name {.inject.} = driver.getString(name)
 
+proc setBoolean*(driver: LuaDriver, name: string, value: bool) =
+  driver.state.pushboolean(cast[cint](value))
+  driver.state.setglobal(name)
+
+proc setString*(driver: LuaDriver, name: string, value: string) =
+  driver.state.pushstring(value.cstring)
+  driver.state.setglobal(name)
+
+proc setNumber*(driver: LuaDriver, name: string, value: float) =
+  driver.state.pushnumber(value)
+  driver.state.setglobal(name)
+
+proc setInteger*(driver: LuaDriver, name: string, value: int) =
+  driver.state.pushinteger(cast[cint](value))
+  driver.state.setglobal(name)
+
+macro setBindBoolean*(driver: LuaDriver, name: untyped) =
+  let nameStrLit = name.strVal.newLit()
+  return quote:
+    block:
+      `driver`.state.pushboolean(cast[cint](`name`))
+      `driver`.state.setglobal(`nameStrLit`)
+
+macro setBindString*(driver: LuaDriver, name: untyped) =
+  let nameStrLit = name.strVal.newLit()
+  return quote:
+    block:
+      `driver`.state.pushstring(`name`)
+      `driver`.state.setglobal(`nameStrLit`)
+
+macro setBindNumber*(driver: LuaDriver, name: untyped) =
+  let nameStrLit = name.strVal.newLit()
+  return quote:
+    block:
+      `driver`.state.pushnumber(cast[float](`name`))
+      `driver`.state.setglobal(`nameStrLit`)
+
+macro setBindInteger*(driver: LuaDriver, name: untyped) =
+  let nameStrLit = name.strVal.newLit()
+  return quote:
+    block:
+      `driver`.state.pushinteger(cast[cint](`name`))
+      `driver`.state.setglobal(`nameStrLit`)
+  
