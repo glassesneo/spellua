@@ -135,7 +135,6 @@ macro call*(driver: LuaDriver, funcname: cstring, args: varargs[typed]) =
         result.add quote do:
           `driver`.state.pushstring((`arg`).cstring)
       else:
-        raise newException(AssertionError, "unsupported type")
+        raise newException(AssertionDefect, "unsupported type")
     result.add quote do:
       `driver`.state.call(cast[cint](`nargs`), 0)
-      
