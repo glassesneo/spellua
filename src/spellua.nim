@@ -2,19 +2,19 @@ import std/macros
 import pkg/seiryu
 import spellua/binding
 
-type LuaDriver* = ref object
+type LuaDriver* = object
   state*: LuaState
 
-proc new*(T: type LuaDriver): T {.construct.} =
+func init*(T: type LuaDriver): T {.construct.} =
   result.state = newstate()
   result.state.openlibs()
 
-proc loadFile*(driver: LuaDriver, filename: string) =
+func loadFile*(driver: LuaDriver, filename: string) =
   if (driver.state.loadfile(filename.cstring) or driver.state.pcall(0, 0, 0)) != 0:
     let msg = driver.state.tostring(-1)
-    raiseAssert("error" & ": " & $msg)
+    raiseAssert("error: " & $msg)
 
-proc close*(driver: LuaDriver) =
+func close*(driver: LuaDriver) =
   driver.state.close()
 
 macro getNumber*(driver: LuaDriver, name: untyped): Number =
@@ -65,19 +65,19 @@ template bindBoolean*(driver: LuaDriver, name: untyped): untyped =
 template bindString*(driver: LuaDriver, name: untyped): untyped =
   let name {.inject.} = driver.getString(name)
 
-proc setBoolean*(driver: LuaDriver, name: string, value: bool) =
+func setBoolean*(driver: LuaDriver, name: string, value: bool) =
   driver.state.pushboolean(cast[cint](value))
   driver.state.setglobal(name)
 
-proc setString*(driver: LuaDriver, name: string, value: string) =
+func setString*(driver: LuaDriver, name: string, value: string) =
   driver.state.pushstring(value.cstring)
   driver.state.setglobal(name)
 
-proc setNumber*(driver: LuaDriver, name: string, value: float) =
+func setNumber*(driver: LuaDriver, name: string, value: float) =
   driver.state.pushnumber(value)
   driver.state.setglobal(name)
 
-proc setInteger*(driver: LuaDriver, name: string, value: int) =
+func setInteger*(driver: LuaDriver, name: string, value: int) =
   driver.state.pushinteger(cast[cint](value))
   driver.state.setglobal(name)
 
@@ -135,6 +135,7 @@ macro call*(driver: LuaDriver, funcname: cstring, args: varargs[typed]) =
         result.add quote do:
           `driver`.state.pushstring((`arg`).cstring)
       else:
-        raise newException(AssertionDefect, "unsupported type")
+        raiseAssert("unsupported type")
     result.add quote do:
       `driver`.state.call(cast[cint](`nargs`), 0)
+

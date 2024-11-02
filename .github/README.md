@@ -29,6 +29,9 @@ let syncVal = 5
 driver.syncInteger(syncVal)
 echo driver.getInteger(syncVal)
 
+# Call lua function (partly supported)
+driver.call("PrintValue", 100)
+
 driver.close()
 ```
 
@@ -43,6 +46,11 @@ Size = 640
 Enable = true
 
 V1 = "bound variable"
+
+---@param value integer
+function PrintValue(value)
+  print(value)
+end
 ```
 
 ## License

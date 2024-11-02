@@ -91,7 +91,7 @@ proc pushany*(state: LuaState, v: Any) =
   elif v.kind == akString:
     state.pushstring(v.getString.cstring)
   else:
-    raise newException(AssertionDefect, "unsupported type")
+    raiseAssert("unsupported type")
 
 proc pop*(state: LuaState, n: cint) =
   state.settop(-n - 1)
