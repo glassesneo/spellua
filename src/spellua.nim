@@ -109,3 +109,33 @@ macro syncInteger*(driver: LuaDriver, name: untyped) =
       `driver`.state.pushinteger(cast[cint](`name`))
       `driver`.state.setglobal(`nameStrLit`)
 
+# call with no return value
+macro call*(driver: LuaDriver, funcname: cstring, args: varargs[typed]) =
+  let nargs = args.len
+  if nargs == 0:
+    return quote:
+      `driver`.state.getglobal(`funcname`)
+      `driver`.state.call(0, 0)
+  else:
+    result = newStmtList()
+    result.add quote do:
+      `driver`.state.getglobal(`funcname`)
+    for arg in args:
+      let t = arg.gettype.typeKind
+      if t == ntyBool:
+        result.add quote do:
+          `driver`.state.pushboolean(cast[cint](`arg`))
+      elif t == ntyInt:
+        result.add quote do:
+          `driver`.state.pushinteger(cast[cint](`arg`))
+      elif t == ntyFloat:
+        result.add quote do:
+          `driver`.state.pushnumber(cast[float](`arg`))
+      elif t == ntyString:
+        result.add quote do:
+          `driver`.state.pushstring((`arg`).cstring)
+      else:
+        raise newException(AssertionError, "unsupported type")
+    result.add quote do:
+      `driver`.state.call(cast[cint](`nargs`), 0)
+      

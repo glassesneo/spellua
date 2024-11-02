@@ -1,3 +1,5 @@
+import std/typeinfo
+
 const LibName =
   when defined(MACOSX):
     "libluajit-5.1.dylib"
@@ -52,7 +54,6 @@ proc getfield*(state: LuaState, index: cint, k: cstring) {.plua.}
 proc luatype*(state: LuaState, index: cint): cint {.importc: "lua_type".}
 
 proc pushnil*(state: LuaState) {.plua.}
-
 proc pushnumber*(state: LuaState, n: Number) {.plua.}
 proc pushinteger*(state: LuaState, n: Integer) {.plua.}
 proc pushboolean*(state: LuaState, b: cint) {.plua.}
@@ -65,6 +66,8 @@ proc setglobal*(state: LuaState, s: cstring) =
 proc settable*(state: LuaState, index: cint) {.plua.}
 proc setmetatable*(state: LuaState, index: cint) {.plua.}
 
+proc call*(state: LuaState, nargs: cint, nresults: cint) {.importc: "lua_call".}
+
 {.push importc: "luaL_$1".}
 
 proc newstate*(): LuaState
@@ -74,6 +77,21 @@ proc loadfile*(state: LuaState, filename: cstring): cint
 {.pop.}
 
 {.pop.}
+
+proc pushany*(state: LuaState, v: Any) =
+  # conditional push value to Lua stack
+  if v.isNil:
+    state.pushnil()
+  elif v.kind == akBool:
+    state.pushboolean(cast[cint](v.getBool))
+  elif v.kind == akInt:
+    state.pushinteger(cast[cint](v.getInt))
+  elif v.kind == akFloat:
+    state.pushnumber(v.getFloat)
+  elif v.kind == akString:
+    state.pushstring(v.getString.cstring)
+  else:
+    raise newException(AssertionError, "unsupported type")
 
 proc pop*(state: LuaState, n: cint) =
   state.settop(-n - 1)
