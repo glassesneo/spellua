@@ -1,11 +1,9 @@
-import
-  std/macros,
-  pkg/[seiryu],
-  spellua/binding
+import std/macros
+import pkg/seiryu
+import spellua/binding
 
-type
-  LuaDriver* = ref object
-    state*: LuaState
+type LuaDriver* = ref object
+  state*: LuaState
 
 proc new*(T: type LuaDriver): T {.construct.} =
   result.state = newstate()
@@ -83,34 +81,34 @@ proc setInteger*(driver: LuaDriver, name: string, value: int) =
   driver.state.pushinteger(cast[cint](value))
   driver.state.setglobal(name)
 
-macro setBindBoolean*(driver: LuaDriver, name: untyped) =
+macro syncBoolean*(driver: LuaDriver, name: untyped) =
   let nameStrLit = name.strVal.newLit()
   return quote:
     block:
       `driver`.state.pushboolean(cast[cint](`name`))
       `driver`.state.setglobal(`nameStrLit`)
 
-macro setBindString*(driver: LuaDriver, name: untyped) =
+macro syncString*(driver: LuaDriver, name: untyped) =
   let nameStrLit = name.strVal.newLit()
   return quote:
     block:
       `driver`.state.pushstring(`name`)
       `driver`.state.setglobal(`nameStrLit`)
 
-macro setBindNumber*(driver: LuaDriver, name: untyped) =
+macro syncNumber*(driver: LuaDriver, name: untyped) =
   let nameStrLit = name.strVal.newLit()
   return quote:
     block:
       `driver`.state.pushnumber(cast[float](`name`))
       `driver`.state.setglobal(`nameStrLit`)
 
-macro setBindInteger*(driver: LuaDriver, name: untyped) =
+macro syncInteger*(driver: LuaDriver, name: untyped) =
   let nameStrLit = name.strVal.newLit()
   return quote:
     block:
       `driver`.state.pushinteger(cast[cint](`name`))
       `driver`.state.setglobal(`nameStrLit`)
-  
+
 # call with no return value
 macro call*(driver: LuaDriver, funcname: cstring, args: varargs[typed]) =
   let nargs = args.len
@@ -140,3 +138,4 @@ macro call*(driver: LuaDriver, funcname: cstring, args: varargs[typed]) =
         raise newException(AssertionError, "unsupported type")
     result.add quote do:
       `driver`.state.call(cast[cint](`nargs`), 0)
+      
