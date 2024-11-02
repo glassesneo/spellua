@@ -55,6 +55,21 @@ proc getfield*(state: LuaState, index: cint, k: cstring) {.plua.}
 
 proc luatype*(state: LuaState, index: cint): cint {.importc: "lua_type".}
 
+proc pushnil*(state: LuaState) {.plua.}
+
+proc pushnumber*(state: LuaState, n: Number) {.plua.}
+proc pushinteger*(state: LuaState, n: Integer) {.plua.}
+proc pushboolean*(state: LuaState, b: cint) {.plua.}
+proc pushstring*(state: LuaState, s: cstring) {.plua.}
+
+proc setfield*(state: LuaState, index: cint, k: cstring) {.plua.}
+proc setglobal*(state: LuaState, s: cstring) =
+  state.setfield(GlobalSIndex, s)
+
+proc settable*(state: LuaState, index: cint) {.plua.}
+proc setmetatable*(state: LuaState, index: cint) {.plua.}
+
+
 {.push importc: "luaL_$1".}
 
 proc newstate*: LuaState
@@ -73,4 +88,3 @@ proc tostring*(state: LuaState, i: cint): cstring =
 
 proc getglobal*(state: LuaState, s: cstring) =
   state.getfield(GlobalSIndex, s)
-
