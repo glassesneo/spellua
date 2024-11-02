@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - "README.*"
+      - "COPYING"
+  pull_request:
+    paths-ignore:
+      - "README.*"
+      - "COPYING"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nim-version: ["2.0.0", "stable"]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim-version }}
+      - run: nimble install -Y
+      - run: nimble tests
+
